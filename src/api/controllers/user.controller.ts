@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { getUserByEmail } from '../models/user.model';
 
 export const getUserHandler = async (req: Request, res: Response) => {
     try {

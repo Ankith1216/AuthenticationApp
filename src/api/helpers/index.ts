@@ -1,7 +1,9 @@
 import bcrypt from 'bcrypt';
+import {sign} from 'jsonwebtoken';
+import {JWT_SECRET} from '../../config/constants';
 
-export const createToken = () => {
-    return bcrypt.hashSync(Date.now().toString(), 10);
+export const createToken = (email:string) => {
+    return sign({email}, JWT_SECRET, {expiresIn: '30s'});
 };
 
 export const hashPassword = async (password: string) => {

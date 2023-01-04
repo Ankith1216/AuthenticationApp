@@ -6,7 +6,7 @@ export const checkEmailExists = async (req: Request, res: Response, next: NextFu
         const { email } = req.body;
         const user = await getUserByEmail(email);
         if(user) {
-            return res.status(400).json({message:'Email already exists'});
+            return res.status(400).json({message:'Email already in use'});
         }
         next();
     } catch (error) {
@@ -20,7 +20,7 @@ export const checkUsernameExists = async (req: Request, res: Response, next: Nex
         const { username } = req.body;
         const user = await getUserByUsername(username);
         if(user) {
-            return res.status(400).json({message:'Username already exists'});
+            return res.status(400).json({message:'Username already in use'});
         }
         next();
     } catch (error) {
