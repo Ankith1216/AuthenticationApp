@@ -14,6 +14,8 @@ export const checkAuth = async (req: Request, res: Response, next: NextFunction)
         return res.status(401).json({ message: 'Unauthorized' });
     }
 
+    // TODO: Check whether the token is still valid or not. That is after logout the user should not access data with the token since it could have been compromised.
+
     try {
         const { email } = jwt.verify(token, JWT_SECRET) as { email: string };
         const user = await getUserByEmail(email);
