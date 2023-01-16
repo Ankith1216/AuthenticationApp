@@ -6,7 +6,16 @@ import { getRefreshToken, getUserByEmail } from '../models/user.model';
 export const checkAuth = async (req: Request, res: Response, next: NextFunction) => {
     const accessToken = req.body.accessToken;
     if (!accessToken) {
-        return res.status(401).json({ message: 'No access token provided' });
+        return res.status(401).json({ message: 'Access token not provided' });
+    }
+
+    const refreshToken = req.body.refreshToken;
+    if (!refreshToken) {
+        return res.status(401).json({ message: 'Refresh token not provided' });
+    }
+    const isValidRefreshToken = await checkRefreshToken(refreshToken);
+    if(!isValidRefreshToken) {
+        return res.status(500).json({message: 'Refresh Token has expired. Please login again'});
     }
 
     try {

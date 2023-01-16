@@ -45,7 +45,7 @@ export const loginUserHandler = async (req: Request, res: Response) => {
             return res.status(401).json({ message: 'Wrong Password' });
         }
         // Issue an access token
-        const accessToken = createToken(email, '1m');
+        const accessToken = createToken(email, '30s');
 
         // Issue a refresh token
         const refreshToken = createToken(email, '5m');
